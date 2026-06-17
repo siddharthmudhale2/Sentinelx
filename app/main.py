@@ -4,11 +4,16 @@ from app.database import engine, Base
 
 # Import models
 from app.models.user_model import User
+from app.models.security_log_model import SecurityLog
 
 # Import routes
 from app.routes.auth_route import router as auth_router
 
 from app.routes.user_route import router as user_router
+
+from app.routes.log_route import router as log_router
+
+
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -22,6 +27,7 @@ app = FastAPI(
 # Register routes
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(log_router)
 
 @app.get("/")
 def home():
